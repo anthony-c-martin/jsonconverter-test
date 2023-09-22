@@ -8,4 +8,16 @@ var entity = new MyEntity {
 
 var serialized = JsonConvert.SerializeObject(entity);
 
+// validate compression works as expected
 Console.WriteLine($"Serialized: {serialized}");
+
+entity = JsonConvert.DeserializeObject<MyEntity>(serialized);
+
+var test = new {
+    entity.Compressed,
+    entity.Uncompressed,
+    entity.Enum
+};
+
+// validate serializing + deserializing gets back the original values
+Console.WriteLine($"Values: {test}");
